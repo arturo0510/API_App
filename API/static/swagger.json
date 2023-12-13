@@ -1,0 +1,126 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Access API",
+      "version": "1.0",
+      "description": "API for managing plant"
+    },
+    "paths": {
+      "/api/plants": {
+        "get": {
+          "summary": "Get a list of plant",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "date_l": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Add a new plant",
+          "parameters": [
+            {
+              "name": "plant",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/plant"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "plant created",
+              "schema": {
+                "$ref": "#/definitions/plant"
+              }
+            }
+          }
+        }
+      },
+      "/api/plants/{plant_id}": {
+        "get": {
+          "summary": "Get a plant by ID",
+          "parameters": [
+            {
+              "name": "plant_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "schema": {
+                "$ref": "#/definitions/plant"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a plant by ID",
+          "parameters": [
+            {
+              "name": "plant_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            },
+            {
+              "name": "updated_data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/plant"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "plant updated",
+              "schema": {
+                "$ref": "#/definitions/plant"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a plant by ID",
+          "parameters": [
+            {
+              "name": "plant_id",
+              "in": "path",
+              "required": true,
+              "type": "integer"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "plant deleted"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "plant": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "description": {"type": "string"},
+          "date_l": {"type": "string"}
+        }
+      }
+    }
+}
